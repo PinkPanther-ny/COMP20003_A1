@@ -31,6 +31,7 @@
 #define CHAR_NULLCHAR '\0'
 #define CHAR_QUOTE '\"'
 #define CHAR_NEWLINE '\n'
+#define CHAR_CR '\r'
 
 #define FOUND1 "FOUND "
 #define FOUND2 " records of"

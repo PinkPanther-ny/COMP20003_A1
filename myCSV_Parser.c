@@ -16,25 +16,28 @@
 char *splitOneToken(char *line, int * lineIndex){
     int isInsideQuote = (line[*lineIndex]==CHAR_QUOTE), destIndex = 0;
     char * dest = (char*)malloc((MAX_LINE_LEN) * sizeof(char));
-    
+    char curChar, nextChar;
+
     for (int i=*lineIndex + isInsideQuote;i<strlen(line);i++){
-    
+    	curChar = line[i];
+        nextChar = line[i+1];
         // If inside a quoted string, just keep storing the char 
         // until meets the end of the line
         if(isInsideQuote){
             if (
-                (line[i]!=CHAR_QUOTE || line[i+1]!=CHAR_SEPERATOR) && 
-                !(line[i+1]==CHAR_NEWLINE || line[i+1]==CHAR_NULLCHAR)
+                (curChar!=CHAR_QUOTE || nextChar!=CHAR_SEPERATOR) && 
+                !(nextChar==CHAR_NEWLINE || nextChar==CHAR_NULLCHAR ||
+                  nextChar==CHAR_CR)
                 ){
                 
                 // If not at the beginning of the line and previous char 
                 // and current char are both quote, then not store it
                 if(
                     (destIndex>=1 && 
-                    (dest[destIndex-1]!=CHAR_QUOTE || line[i]!=CHAR_QUOTE))
+                    (dest[destIndex-1]!=CHAR_QUOTE || curChar!=CHAR_QUOTE))
                     ||(destIndex==0)
                 ){
-                    dest[destIndex++] = line[i];
+                    dest[destIndex++] = curChar;
                 }
             // At the end of a quoted string, return the token
             }else{
@@ -46,15 +49,16 @@ char *splitOneToken(char *line, int * lineIndex){
         }else{
             // Not inside quote and then check if it is at the begin or end
             if (
-                line[i]!=CHAR_SEPERATOR && 
-                !(line[i+1]==CHAR_NEWLINE || line[i+1]==CHAR_NULLCHAR)
+                curChar!=CHAR_SEPERATOR && 
+                !(nextChar==CHAR_NEWLINE || nextChar==CHAR_NULLCHAR ||
+                  nextChar==CHAR_CR)
             ){
                 if(
                     (destIndex>=1 && 
-                    (dest[destIndex-1]!=CHAR_QUOTE || line[i]!=CHAR_QUOTE))
+                    (dest[destIndex-1]!=CHAR_QUOTE || curChar!=CHAR_QUOTE))
                     ||(destIndex==0)
                 ){
-                    dest[destIndex++] = line[i];
+                    dest[destIndex++] = curChar;
                 }
             // Reach the end of a quoted string, return the token
             }else{

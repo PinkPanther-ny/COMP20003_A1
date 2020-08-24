@@ -21,13 +21,13 @@ KEYWORD_FILE = sampleInput.txt
 # but clean object files remains :)
 
 
-all: build clean #run #show 
+all: build clean run #show 
 
 build: $(PROGRAM)
 
 clean:
 	rm -f $(OBJECT_FILES)
-	#$(cls_cmd)
+	$(cls_cmd)
     
 run: build
 	./$(PROGRAM) $(DATA_FILE) $(OUTPUT_FILE) < $(KEYWORD_FILE)
