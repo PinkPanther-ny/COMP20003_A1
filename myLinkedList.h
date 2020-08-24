@@ -28,9 +28,7 @@ typedef struct List{
 void Node(Node_t *this, Clue_t *data, Node_t *next);
 List_t *creatLinkedList();
 List_t *push(List_t *list, Clue_t *data);
-void readFileToList(List_t *dest, char *filename);
 int linearSearch(char *keyWord, List_t *src, List_t *result);
 void putLinkedList(List_t *src, FILE *fp);
 void freeLinkedList(List_t *list);
-char *splitOneToken(char *line, int *lineIndex);
 #endif

@@ -39,17 +39,17 @@
 
 typedef struct CLUE{
     // Say it's better to store as string type
-    char censusYear[MAX_FIELD_LEN];
-    char blockID[MAX_FIELD_LEN];
-    char propertyID[MAX_FIELD_LEN];
-    char basePropertyID[MAX_FIELD_LEN];
+    char *censusYear;
+    char *blockID;
+    char *propertyID;
+    char *basePropertyID;
     
-    char clueSmallArea[MAX_FIELD_LEN];
-    char tradingName[MAX_FIELD_LEN];
-    char industryCode[MAX_FIELD_LEN];
-    char industryDescription[MAX_FIELD_LEN];
-    char xCoord[MAX_FIELD_LEN], yCoord[MAX_FIELD_LEN];
-    char location[MAX_FIELD_LEN];
+    char *clueSmallArea;
+    char *tradingName;
+    char *industryCode;
+    char *industryDescription;
+    char *xCoord, *yCoord;
+    char *location;
     
 }Clue_t;
 
@@ -60,6 +60,6 @@ Clue_t *Clue(
     char* xCoord, char* yCoord, char *location
     );
 void putClueInfo(Clue_t *clue, FILE * fp, char *keyWord);
-Clue_t *storeFields(char fields[][MAX_FIELD_LEN]);
+Clue_t *storeFields(char *fields[]);
 
 #endif

@@ -24,6 +24,7 @@ creatLinkedList(){
     return list;
 }
 
+
 void
 freeLinkedList(List_t *list) {
     assert(list!=NULL);
@@ -39,6 +40,7 @@ freeLinkedList(List_t *list) {
     
 }
 
+
 void 
 putLinkedList(List_t *src, FILE * fp){
     Node_t * ptr = src->head;
@@ -48,7 +50,6 @@ putLinkedList(List_t *src, FILE * fp){
         
     }
 }
-
 
 
 /* Push an CLUE item to the head of the list */
@@ -71,38 +72,12 @@ push(List_t *list, Clue_t *data){
 }
 
 
-void 
-readFileToList(List_t *dest, char *filename){
-    int lineCount = 0;
-    FILE *fp = fopen(filename, "r");
-    assert(fp != NULL);
-    char fields[FIELD_NUM][MAX_FIELD_LEN];
-    
-    char *line = (char*)malloc((MAX_LINE_LEN) * sizeof(char));
-    // Remove header line of CSV
-    fgets(line, MAX_LINE_LEN, fp);
-    int lineIndex;
-    printf("\n----------Start readCSV-------------\n");
-    // Iterate over each lines of the csv file
-    while(fgets(line, MAX_LINE_LEN, fp)!=NULL){
-        lineCount++;
-        lineIndex=0;
-        
-        for(int i=0;i<FIELD_NUM;i++){
-            strcpy(fields[i], splitOneToken(line, &lineIndex));
-        }
-        push(dest, storeFields(fields));
-    }
-    fclose(fp);
-    printf("There are %d lines.\n", lineCount);
-    printf("\n-----------END readCSV--------------\n");
-}
-
 int 
 linearSearch(char *keyWord, List_t *src, List_t *result){
     int found = 0;
     Node_t * ptr = src->head;
     while(ptr != NULL){
+    
         if (strcmp(ptr->data->tradingName, keyWord)==0){
             push(result, ptr->data);
             found++;

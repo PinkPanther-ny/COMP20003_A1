@@ -12,9 +12,11 @@
 #include <string.h>
 #include <assert.h>
 
+#include "myLinkedList.h"
 #include "myCLUE.h"
 
 // Function prototypes
 char *splitOneToken(char *line, int * lineIndex);
+void readFileToList(List_t *dest, char *filename);
 
 #endif

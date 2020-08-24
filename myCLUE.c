@@ -13,23 +13,24 @@ Clue(
     char* xCoord, char* yCoord, char *location
     ){
     
-    Clue_t *clue = (Clue_t*)malloc(sizeof(Clue_t));
-    assert(clue != NULL);
+    Clue_t *this = (Clue_t*)malloc(sizeof(Clue_t));
+    assert(this != NULL);
     
-    strcpy(clue -> censusYear, censusYear);
-    strcpy(clue -> blockID, blockID);
-    strcpy(clue -> propertyID, propertyID);
-    strcpy(clue -> basePropertyID, basePropertyID);
+    this -> censusYear = censusYear;
+    this -> blockID = blockID;
+    this -> propertyID = propertyID;
+    this -> basePropertyID = basePropertyID;
     
-    strcpy(clue -> clueSmallArea, clueSmallArea);
-    strcpy(clue -> tradingName, tradingName);
-    strcpy(clue -> industryCode, industryCode);
-    strcpy(clue -> industryDescription, industryDescription);
+    this -> clueSmallArea = clueSmallArea;
+    this -> tradingName = tradingName;
+    this -> industryCode = industryCode;
+    this -> industryDescription = industryDescription;
     
-    strcpy(clue -> xCoord, xCoord); 
-    strcpy(clue -> yCoord, yCoord);
-    strcpy(clue -> location, location);
-    return clue;
+    this -> xCoord = xCoord;
+    this -> yCoord = yCoord;
+    this -> location = location;
+    
+    return this;
 }
 
 /**
@@ -75,7 +76,7 @@ putClueInfo(Clue_t *clue, FILE * fp, char *keyWord){
 * return clue -A pointer to a Clue_t data which store the line
 */
 Clue_t * 
-storeFields(char fields[][MAX_FIELD_LEN]){
+storeFields(char *fields[]){
     // Call the Clue_t constructor, return its address
     Clue_t * clue = Clue(
     
