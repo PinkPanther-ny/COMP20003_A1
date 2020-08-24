@@ -1,1 +1,7 @@
-dict
+*
+
+!*.c
+!*.h
+!*.csv
+!Makefile
+!README.md
