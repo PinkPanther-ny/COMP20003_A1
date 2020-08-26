@@ -8,10 +8,10 @@
 ##########################################################################
 
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g
 
 VALGRIND = valgrind
-VALGRINDFLAG = --leak-check=full --read-var-info=yes  --track-origins=yes --tool=memcheck
+VALGRINDFLAG = --leak-check=full --read-var-info=no  --track-origins=yes --tool=memcheck
 
 PROGRAM = dict
 SOURCE_FILES = $(shell find . -maxdepth 1 -type f -name '*.c')
@@ -21,8 +21,8 @@ cls_cmd:=tput clear
 
 .PHONY: all build clean run show valgrind
 
-DATA_FILE = small.csv
-#DATA_FILE = Business_establishment_trading_name_and_industry_classification_2018.csv
+#DATA_FILE = small.csv
+DATA_FILE = Business_establishment_trading_name_and_industry_classification_2018.csv
 OUTPUT_FILE = sampleOutput.txt
 KEYWORD_FILE = sampleInput.txt
 

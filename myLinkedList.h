@@ -31,4 +31,5 @@ List_t *push(List_t *list, Clue_t *data);
 int linearSearch(char *keyWord, List_t *src, List_t *result);
 void putLinkedList(List_t *src, FILE *fp);
 void freeLinkedList(List_t *list);
+void freeListNode(List_t *list);
 #endif

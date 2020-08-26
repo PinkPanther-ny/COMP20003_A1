@@ -35,6 +35,7 @@ main(int argc, char *argv[]) {
         // Cannot do freeLinkedList() since the function also free the data
         // and data address is the same to data in the storage list
         // free whole result will cause missing data in the main storage list.
+        // Only need to free each node here
         // takes me 3 days to solve this one haha
         
         foundNum = linearSearch(keyWord, list, result);
@@ -55,9 +56,7 @@ main(int argc, char *argv[]) {
             strcat(log, FOUND2);
             printf("%28s\t%s\n", log, keyWord);
         }
-        
-        free(result->foot);
-        free(result);
+        freeListNode(result);
         
     }
     fclose(fp);

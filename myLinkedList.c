@@ -57,6 +57,23 @@ freeLinkedList(List_t *list) {
 }
 
 
+void
+freeListNode(List_t *list) {
+    assert(list!=NULL);
+    Node_t *cur, *pre;
+    
+    cur = list->head;
+    while (cur) {
+        pre = cur;
+        cur = cur->next;
+
+        free(pre);
+    }
+    free(list);
+    
+}
+
+
 void 
 putLinkedList(List_t *src, FILE * fp){
     Node_t * ptr = src->head;
