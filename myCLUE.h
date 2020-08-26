@@ -11,8 +11,8 @@
 #include <string.h>
 #include <assert.h>
 
-#define MAX_LINE_LEN (512+1)
-#define MAX_FIELD_LEN (128+1)
+#define MAX_LINE_LEN 512
+#define MAX_FIELD_LEN 128
 #define FIELD_NUM 11
 
 #define FIELD_CENSUS_YEAR 0
@@ -31,7 +31,6 @@
 #define CHAR_NULLCHAR '\0'
 #define CHAR_QUOTE '\"'
 #define CHAR_NEWLINE '\n'
-#define CHAR_CR '\r'
 
 #define FOUND1 "FOUND "
 #define FOUND2 " records of"

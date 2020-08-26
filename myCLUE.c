@@ -29,7 +29,6 @@ Clue(
     this -> xCoord = xCoord;
     this -> yCoord = yCoord;
     this -> location = location;
-    
     return this;
 }
 
@@ -52,13 +51,13 @@ putClueInfo(Clue_t *clue, FILE * fp, char *keyWord){
     }else{
         fprintf(
             fp,
-            "%s −− >Census year: %s || Block ID: %s || "
-            "Property ID: %s ||  Base property ID: %s || "
+            "%s --> Census year: %s || Block ID: %s || "
+            "Property ID: %s || Base property ID: %s || "
             "CLUE small area: %s || "
-            "Industry (ANZSIC4) code: %s ||  "
+            "Industry (ANZSIC4) code: %s || "
             "Industry (ANZSIC4) description: %s || "
             "x coordinate: %s || y coordinate: %s || "
-            "Location: %s ||\n\n",
+            "Location: %s || \n",
             clue -> tradingName,
             clue -> censusYear, clue -> blockID,
             clue -> propertyID, clue -> basePropertyID, 

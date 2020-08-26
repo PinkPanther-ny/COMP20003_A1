@@ -15,56 +15,56 @@
 */
 char *splitOneToken(char *line, int * lineIndex){
     int isInsideQuote = (line[*lineIndex]==CHAR_QUOTE), destIndex = 0;
-    char * dest = (char*)malloc((MAX_LINE_LEN) * sizeof(char));
-    char curChar, nextChar;
-
+    char * dest = (char*)malloc((MAX_FIELD_LEN+1) * sizeof(char));
+    
     for (int i=*lineIndex + isInsideQuote;i<strlen(line);i++){
-    	curChar = line[i];
-        nextChar = line[i+1];
+    
         // If inside a quoted string, just keep storing the char 
         // until meets the end of the line
         if(isInsideQuote){
             if (
-                (curChar!=CHAR_QUOTE || nextChar!=CHAR_SEPERATOR) && 
-                !(nextChar==CHAR_NEWLINE || nextChar==CHAR_NULLCHAR ||
-                  nextChar==CHAR_CR)
+                (line[i]!=CHAR_QUOTE || line[i+1]!=CHAR_SEPERATOR) && 
+                !(line[i+1]==CHAR_NEWLINE || line[i+1]==CHAR_NULLCHAR)
                 ){
                 
                 // If not at the beginning of the line and previous char 
                 // and current char are both quote, then not store it
                 if(
                     (destIndex>=1 && 
-                    (dest[destIndex-1]!=CHAR_QUOTE || curChar!=CHAR_QUOTE))
+                    (dest[destIndex-1]!=CHAR_QUOTE || line[i]!=CHAR_QUOTE))
                     ||(destIndex==0)
                 ){
-                    dest[destIndex++] = curChar;
+                    dest[destIndex++] = line[i];
                 }
             // At the end of a quoted string, return the token
             }else{
                 dest[destIndex] = CHAR_NULLCHAR;
                 // jump to the comma after the quote
                 *lineIndex = i + 2;
+                
+                //dest = (char *)realloc(dest, (strlen(dest) + 1) * sizeof(char));
                 return dest;
             }
         }else{
             // Not inside quote and then check if it is at the begin or end
             if (
-                curChar!=CHAR_SEPERATOR && 
-                !(nextChar==CHAR_NEWLINE || nextChar==CHAR_NULLCHAR ||
-                  nextChar==CHAR_CR)
+                line[i]!=CHAR_SEPERATOR && 
+                !(line[i+1]==CHAR_NEWLINE || line[i+1]==CHAR_NULLCHAR)
             ){
                 if(
                     (destIndex>=1 && 
-                    (dest[destIndex-1]!=CHAR_QUOTE || curChar!=CHAR_QUOTE))
+                    (dest[destIndex-1]!=CHAR_QUOTE || line[i]!=CHAR_QUOTE))
                     ||(destIndex==0)
                 ){
-                    dest[destIndex++] = curChar;
+                    dest[destIndex++] = line[i];
                 }
             // Reach the end of a quoted string, return the token
             }else{
                 dest[destIndex] = CHAR_NULLCHAR;
                 // jump to next comma
                 *lineIndex = i + 1;
+                
+                //dest = (char *)realloc(dest, (strlen(dest) + 1) * sizeof(char));
                 return dest;
             }
         }
@@ -86,8 +86,9 @@ readFileToList(List_t *dest, char *filename){
     // Then come back again to take another line
     char *fields[FIELD_NUM];
     
+    
     int lineIndex;
-    char line[MAX_LINE_LEN];
+    char line[MAX_LINE_LEN+1];
     
     // Remove header line of CSV
     fgets(line, MAX_LINE_LEN, fp);

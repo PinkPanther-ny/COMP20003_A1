@@ -34,6 +34,22 @@ freeLinkedList(List_t *list) {
     while (cur) {
         pre = cur;
         cur = cur->next;
+
+        free(pre->data->censusYear);
+        free(pre->data->blockID);
+        free(pre->data->propertyID);
+        free(pre->data->basePropertyID);
+        
+        free(pre->data->clueSmallArea);
+        free(pre->data->tradingName);
+        free(pre->data->industryCode);
+        free(pre->data->industryDescription);
+        
+        free(pre->data->xCoord);
+        free(pre->data->yCoord);
+        free(pre->data->location);
+        free(pre->data);
+        
         free(pre);
     }
     free(list);

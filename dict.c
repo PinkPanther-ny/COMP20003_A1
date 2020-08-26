@@ -22,7 +22,7 @@ main(int argc, char *argv[]) {
     assert(fp!=NULL);
     
     int foundNum;
-    char keyWord[MAX_FIELD_LEN];
+    char keyWord[MAX_FIELD_LEN+1];
     List_t * result;
     
     char log[MAX_LOG_LEN];
@@ -31,6 +31,12 @@ main(int argc, char *argv[]) {
     while(scanf("%[^\n]%*c", keyWord)!=EOF){
     
         result = creatLinkedList();
+        // Temperary keep track of each keyword's matches
+        // Cannot do freeLinkedList() since the function also free the data
+        // and data address is the same to data in the storage list
+        // free whole result will cause missing data in the main storage list.
+        // takes me 3 days to solve this one haha
+        
         foundNum = linearSearch(keyWord, list, result);
         if(!foundNum){
             putClueInfo(NULL, fp, keyWord);
@@ -49,12 +55,16 @@ main(int argc, char *argv[]) {
             strcat(log, FOUND2);
             printf("%28s\t%s\n", log, keyWord);
         }
-        freeLinkedList(result);
+        
+        free(result->foot);
+        free(result);
+        
     }
     fclose(fp);
     
     /* Free the linked list that stores whole data */
     freeLinkedList(list);
+    
     printf("\n\n");
     
     return 0;
